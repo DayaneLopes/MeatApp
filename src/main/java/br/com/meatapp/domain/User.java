@@ -29,11 +29,10 @@ public class User implements Serializable{
 	
 	@NotNull
 	@Email
-	@Column(name="email")
+	@Column(name="email", unique = true)
 	private String email;
 	
 	@NotNull
-	@JsonIgnore
 	@Column(name="password")
 	private String password;
 	
@@ -66,7 +65,8 @@ public class User implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
 	public String getEmail() {
 		return email;
 	}
