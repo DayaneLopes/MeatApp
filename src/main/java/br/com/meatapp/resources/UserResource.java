@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,6 +46,17 @@ public class UserResource {
 	public ResponseEntity<User> insert(@Valid @RequestBody User user){
 		user = userService.insert(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id/{id}").buildAndExpand(user.getId()).toUri();
-		return ResponseEntity.created(uri).body(user);
+		return ResponseEntity.created(uri).body(user);//retorna o usuario
+	}
+	@RequestMapping(value="id/{id}", method=RequestMethod.PUT)      //PUT- para alterar alguma coisa
+	public ResponseEntity<Void> update(@Valid @RequestBody User user, @PathVariable Integer id){
+		user = userService.update(user, id);
+		return ResponseEntity.noContent().build();
+		
+	}
+	@RequestMapping(value="id/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<User> delete(@PathVariable Integer id){
+		userService.delete(id);
+		return ResponseEntity.noContent().build();//nao retorna nada
 	}
 }
