@@ -7,7 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import br.com.meatapp.domain.Restaurant;
 import br.com.meatapp.domain.User;
+import br.com.meatapp.repositories.RestaurantRepository;
 import br.com.meatapp.repositories.UserRepository;
 
 @SpringBootApplication
@@ -15,6 +17,8 @@ public class MeatApp2Application implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
+	private RestaurantRepository restaurantRepository;
+	private RestaurantRepository menuItemReposi;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeatApp2Application.class, args);
@@ -25,6 +29,8 @@ public class MeatApp2Application implements CommandLineRunner {
 		User user1 = new User(1, "Dayane", "dayanelopeslee@gmail.com", "123");
 		User user2 = new User(2, "Mateus", "mateuspereira@gmail.com", "123");
 		userRepository.saveAll(Arrays.asList(user1, user2));
+		
+		
 	}
 
 }
